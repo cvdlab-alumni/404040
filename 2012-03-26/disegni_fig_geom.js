@@ -12,10 +12,15 @@ var mapped = MAP(mapping)(domain);	//MAP applica la funzione mapping su tutti i 
 
 
 //esercizio: disegnare la bisettrice del primo quadrante
-var bisettrice = function (p) {
+var mapping1 = function (p) {
 	var u = p[0];
 	return [u, u];
 };
+
+var bisettrice = MAP(mapping1)(domain);
+DRAW(bisettrice);
+COLOR([0,0,0])(bisettrice);
+
 
 
 
