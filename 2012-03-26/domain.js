@@ -1,12 +1,29 @@
-//dominio monodimensionale
-var domain1 = DOMAIN([[1,5]])(4);
+// collegarsi al sito: http://www.dia.uniroma3.it/~cvdlab/plasm.js/
 
-//dominio bidimensionale
-var domain2 = DOMAIN([[1.5,5.5],[1,3]])([4,2]);
 
-//dominio tridimensionale
-var domain3 = DOMAIN([[1.5,5.5],[1,3],[0,1]])([4,2,1]);
+// dominio monodimensionale
+var retta = DOMAIN([[1,5]])(4);
 
-//DRAW(domain); disegna l'oggetto domain
-//HIDE(domain); nasconde l'oggetto domain
-//SHOW(domain); rimostra l'oggetto domain
+// dominio bidimensionale
+var piano = DOMAIN([[1.5,5.5],[1,3]])([4,2]);
+
+// dominio tridimensionale
+var piano3D = DOMAIN([[1.5,5.5],[1,3],[0,1]])([4,2,1]);
+
+// DRAW(retta); disegna l'oggetto retta
+// HIDE(retta); nasconde l'oggetto retta
+// SHOW(retta); rimostra l'oggetto retta
+// COLOR(R,G,B)(retta); colora l'oggetto retta in base ai valori (esadecimali) R, G, B
+
+
+
+
+var domain = DOMAIN([[0,1]])([10]);	// divide il segmento (0,1) in 10 intervalli
+
+var mapping = function (p) {	// p è un array ad m dimensioni (m coordinate) rappresentante un punto del dominio
+	var u = p[0];
+	return [u, 1];
+};
+
+var mapped = MAP(mapping)(domain);	// MAP applica la funzione mapping su tutti i punti del
+									// dominio domain, e ritorna un nuovo dominio
