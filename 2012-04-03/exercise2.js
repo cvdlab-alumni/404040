@@ -43,6 +43,16 @@ var muri3D = STRUCT([muroVicinoPanchina, muro1, muro2, muro3, muro4, muro5, muro
 //DRAW(muri3D);
 
 
+var vetrata1 = T([0,1,2])([31,7.5,1])(SIMPLEX_GRID([[0.25],[6],[3]]));
+var vetrata2 = T([0,1,2])([32,7.5,1])(SIMPLEX_GRID([[0.25],[6],[3]]));
+var vetrata3 = T([0,1,2])([30,13.5,1])(SIMPLEX_GRID([[10],[0.25],[3]]));
+var vetrata4 = T([0,1,2])([44.6,6.8,1])(SIMPLEX_GRID([[0.25],[7.3],[3]]));
+var vetrata5 = T([0,1,2])([30,5-0.25,1])(SIMPLEX_GRID([[11.2],[0.25],[3]]));
+var vetrata6 = T([0,1,2])([39,13.5+0.25,1])(SIMPLEX_GRID([[0.25],[2.25],[3]]));
+var vetrate3D = STRUCT([vetrata1,vetrata2,vetrata3,vetrata4,vetrata5,vetrata6]);
+//DRAW(vetrate3D);
+
+
 var tettoGrande = T([0,1,2])([24,4,4])(SIMPLEX_GRID([[23],[13],[0.4]]));
 var tettoPiccolo = T([0,1,2])([0,13,4])(SIMPLEX_GRID([[10],[10],[0.4]]));
 var tetti3D = STRUCT([tettoGrande, tettoPiccolo]);
@@ -60,5 +70,5 @@ var basePanchina = T([0,1,2])([7,14,1+0.4])(SIMPLEX_GRID([[15.6], [0.5], [0.15]]
 var panchina3D = STRUCT([piediPanchina, basePanchina]);
 //DRAW(panchina3D);
 
-var pavilionFinale = STRUCT([floor3D, piscine3D, scala3D, muri3D, tetti3D, colonne3D, panchina3D]);
+var pavilionFinale = STRUCT([floor3D, piscine3D, scala3D, muri3D, tetti3D, colonne3D, panchina3D, vetrate3D]);
 DRAW(pavilionFinale);
