@@ -160,16 +160,16 @@ var scmodelPosacenere = STRUCT([
 
 /*********************** sigaretta ********************/
 var s1 = CUBIC_HERMITE(S0)([[0,0,0],[0,0.1,0],[0,0,0.2],[0,0,-0.2]]); 
-var s2 = CUBIC_HERMITE(S0)([[0.7,0,0],[0.7,0.1,0],[0,0,0.2],[0,0,-0.2]]);
+var s2 = CUBIC_HERMITE(S0)([[0.72,0,0],[0.72,0.1,0],[0,0,0.2],[0,0,-0.2]]);
 var s1s2 = CUBIC_HERMITE(S1)([s1,s2,[0,0,0], [0,0,0]]);
 var colonna1 = MAP(s1s2)(domain2);
-var colonna2 = T([0])([0.7])(R([0,2])([PI])(colonna1));
+var colonna2 = T([0])([0.72])(R([0,2])([PI])(colonna1));
 var colonna = STRUCT([colonna1,colonna2]);
 
 var s3 = CUBIC_HERMITE(S0)([[1,0,0],[1,0.1,0],[0,0,0.2],[0,0,-0.2]]);
 var s2s3 = CUBIC_HERMITE(S1)([s2,s3,[0,0,0], [0,0,0]]);
 var filtro1 = MAP(s2s3)(domain2);
-var filtro2 = T([0])([1.7])(R([0,2])([PI])(filtro1));
+var filtro2 = T([0])([1.72])(R([0,2])([PI])(filtro1));
 var filtro = STRUCT([filtro1,filtro2]);
 
 
@@ -183,7 +183,7 @@ var t4 = CUBIC_HERMITE(S0)([[1,0,0],[1,0.1,0],[0,0,-0.2],[0,0,0.2]]);
 var t3t4 = CUBIC_HERMITE(S1)([t3,t4,[0,0,0], [0,0,0]]);
 var baseFiltro = MAP(t3t4)(domain2);
 
-var scmodelSigaretta = T([1,2])([0.45,0.08])(R([0,2])([-PI/7])(STRUCT([
+var scmodelSigaretta = T([0,1,2])([-0.14,0.45,0.1])(R([0,2])([-PI/10])(STRUCT([
 												COLOR(bianco)(colonna),
 												COLOR(marrone)(filtro),
 												COLOR(marrone)(baseColonna),
@@ -193,4 +193,4 @@ var scmodelSigaretta = T([1,2])([0.45,0.08])(R([0,2])([-PI/7])(STRUCT([
 
 /************ scmodel: posacenere con sigaretta **************/
 var scmodel = STRUCT([scmodelPosacenere, scmodelSigaretta]);
-DRAW(scmodel);
+//DRAW(scmodel);
