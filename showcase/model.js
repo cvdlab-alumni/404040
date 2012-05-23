@@ -188,5 +188,6 @@ var sigaretta = T([0,1,2])([-0.14,0.45,0.09])(R([0,2])([-PI/10])(STRUCT([
 
 
 /************ scmodel: posacenere con sigaretta **************/
-var scmodel = STRUCT([posacenere, sigaretta]);
+var modello = STRUCT([posacenere, sigaretta]);
+var scmodel = S([0,1,2])([2,2,2])(modello);
 //DRAW(scmodel);
