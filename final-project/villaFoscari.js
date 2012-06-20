@@ -1867,7 +1867,7 @@ var getCornicionePosteriore_Superiore = function(){
 *	Il cornicione superiore è largo 8.35 e lungo 0.6;												*
 *****************************************************************************************************
 *	Tutta la facciata quindi è lunga 16.3 (se si considera il muro centrale), oppure 16.5 (se si	*
-*	considera il muro inferiore), oppure 16.9 (se si considera il cornicione alla base).			*														*
+*	considera il muro inferiore), oppure 16.9 (se si considera il cornicione alla base).			*
 *****************************************************************************************************/
 var getFacciataPosteriore = function(){
 	var facciataPosteriore = STRUCT([	getCornicionePosteriore_AllaBase(),
@@ -1888,7 +1888,7 @@ var getFacciataPosteriore = function(){
 /**************************** TETTO ****************************/
 
 /************************************************************************************
-*	Ritorna la copertura superiore, comprese le mansarde (ma senza camini);			*											*
+*	Ritorna la copertura superiore, comprese le mansarde (ma senza camini);			*
 *************************************************************************************/
 var getCopertura = function(){
 	//muri
