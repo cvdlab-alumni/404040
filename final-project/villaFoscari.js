@@ -22,7 +22,6 @@ var rossoTetti = [0.823,0.121,0.106]	//rosso pompeiano: D21F1B
 var verdeErba = [0.01,0.753,0.235]	//verde pastello scuro: 03C03C
 var grigioViale = [1,0.8,0.6]	//pesca-arancio: FFCC99
 
-var domain1 = INTERVALS(1)(30);
 var domain2 = DOMAIN([[0,1],[0,1]])([10,25]);
 var domain3 = DOMAIN([[0,1],[0,1],[0,1]])([1,1,1]);
 
@@ -159,7 +158,7 @@ var getCornicioneFrontale_AllaBase = function(){
 *	Ritorna anche il muro dietro la scalinata (comprese le finestre).
 ************************************************************************************************/
 var getScalinata = function(){
-	var scalinataBeta = STRUCT([SIMPLEX_GRID([[-6.45,1.5],[0.2],[0.125]]),
+	var scalinataAlfa = STRUCT([SIMPLEX_GRID([[-6.45,1.5],[0.2],[0.125]]),
 								SIMPLEX_GRID([[-6.45,1.5],[-0.2,0.2],[0.25]]),
 								SIMPLEX_GRID([[-6.45,1.5],[-0.4,1.5],[0.375]]),
 								SIMPLEX_GRID([[-6.45,1.5],[-1.9,0.2],[0.5]]),
@@ -187,17 +186,17 @@ var getScalinata = function(){
 								SIMPLEX_GRID([[-4.45,0.2],[-4.3,1.55],[3.25]]),
 								SIMPLEX_GRID([[4.45],[-4.3,1.55],[-3.125,0.125]]) //unione scalinate
 								]);
-	var scalinata = COLOR(bianco)(STRUCT([scalinataBeta, S([0])([-1])(scalinataBeta)]));
+	var scalinata = COLOR(bianco)(STRUCT([scalinataAlfa, S([0])([-1])(scalinataAlfa)]));
 
 	//finestre dentro le scale
 	var finestraDentro = T([1])([4.4])(getFinestraFrontale_06x06());
 	var finestreDentro = STRUCT([T([0])([4.85])(finestraDentro),T([0])([-5.45])(finestraDentro)]);
 
 	//muro
-	var muroBeta = STRUCT([ SIMPLEX_GRID([[6.45,-0.9,0.9],[-5.8,0.5],[3]]),
+	var muroAlfa = STRUCT([ SIMPLEX_GRID([[6.45,-0.9,0.9],[-5.8,0.5],[3]]),
 							SIMPLEX_GRID([[-6.45,0.9],[-5.8,0.5],[2,-0.6,0.4]])
 							]);
-	var muro = COLOR(bianco)(STRUCT([muroBeta, S([0])([-1])(muroBeta)]));
+	var muro = COLOR(bianco)(STRUCT([muroAlfa, S([0])([-1])(muroAlfa)]));
 
 	//finestre dietro le scale
 	var finestraDietro = T([1,2])([5.9,2])(getFinestraFrontale_09x06());
@@ -214,18 +213,18 @@ var getScalinata = function(){
 *	destra del muro che ha coordinate x=4.45, y=0, z=0.
 ******************************************************************************************/
 var getPortico = function(){
-	var muroBeta = STRUCT([	SIMPLEX_GRID([[0.55],[0.6],[-2.5,1]]),
+	var muroAlfa = STRUCT([	SIMPLEX_GRID([[0.55],[0.6],[-2.5,1]]),
 							SIMPLEX_GRID([[-0.55,0.8,-0.7,0.8,-0.7,0.9],[0.6],[3.5]]),
 							SIMPLEX_GRID([[-1.35,0.7,-0.8,0.7],[0.6],[1.6,-0.9,1]]),
 							SIMPLEX_GRID([[-3.85,0.6],[-0.6,0.15,-0.7,0.75],[3.5]]),
 							SIMPLEX_GRID([[-3.85,0.6],[-0.75,0.7],[1.6,-0.9,1]]),
 							SIMPLEX_GRID([[3.85],[-0.6,1.6],[-3.125,0.125]])	//pianerottolo
 							]);
-	var muro = COLOR(bianco)(STRUCT([muroBeta, S([0])([-1])(muroBeta)]));
+	var muro = COLOR(bianco)(STRUCT([muroAlfa, S([0])([-1])(muroAlfa)]));
 
 	//porta
-	var portaBeta = SIMPLEX_GRID([[0.55],[-0.1,0.5],[2.5]]);
-	var porta = COLOR(grigioPortone)(STRUCT([portaBeta, S([0])([-1])(portaBeta)]));
+	var portaAlfa = SIMPLEX_GRID([[0.55],[-0.1,0.5],[2.5]]);
+	var porta = COLOR(grigioPortone)(STRUCT([portaAlfa, S([0])([-1])(portaAlfa)]));
 	
 	//finestre frontali
 	var finestraFrontale = T([1])([0.1])(getFinestraFrontale_07x09());
@@ -243,8 +242,8 @@ var getPortico = function(){
 									T([0,1])([-4.45,1.45])(finestraLateraleSinistra)
 									]);
 
-	var patio = STRUCT([muro,porta,finestreFrontali,finestreLaterali]);
-	return patio;
+	var portico = STRUCT([muro,porta,finestreFrontali,finestreLaterali]);
+	return portico;
 };
 
 
@@ -256,11 +255,11 @@ var getPortico = function(){
 *	Il tetto del portone sporge sull'asse delle y negative di 0.3
 *************************************************************************************************************/
 var getMuroFrontale_Centrale = function(){
-	var muroBeta = STRUCT([	SIMPLEX_GRID([[-1,1.8,-0.9,2.75,-0.9,0.8],[0.4],[-3.85,3.95]]),
+	var muroAlfa = STRUCT([	SIMPLEX_GRID([[-1,1.8,-0.9,2.75,-0.9,0.8],[0.4],[-3.85,3.95]]),
 							SIMPLEX_GRID([[-2.8,0.9,-2.75,0.9],[0.4],[-3.85,0.1,-2.1,1.75]]),
 							SIMPLEX_GRID([[1],[0.4],[-6.7,1.1]])
 							]);
-	var muro = COLOR(avorioMuro)(STRUCT([muroBeta, S([0])([-1])(muroBeta)]));
+	var muro = COLOR(avorioMuro)(STRUCT([muroAlfa, S([0])([-1])(muroAlfa)]));
 
 	var finestra = T([1])([0.1])(getFinestraFrontale_09x21());
 	var finestre = STRUCT([	T([0])([2.8])(finestra),
@@ -269,31 +268,43 @@ var getMuroFrontale_Centrale = function(){
 							T([0])([-7.35])(finestra)
 							]);
 
-	var portaPortoneBeta = SIMPLEX_GRID([[0.8],[-0.1,0.3],[-3.2,3.3]]);
-	var portaPortone = COLOR(grigioPortone)(STRUCT([portaPortoneBeta, S([0])([-1])(portaPortoneBeta)]));
-	var cornicePortoneBeta = STRUCT([	SIMPLEX_GRID([[1],[0.4],[-6.5,0.2]]),		//corniceOrizzontale
+	var portaPortoneAlfa = SIMPLEX_GRID([[0.8],[-0.1,0.3],[-3.2,3.3]]);
+	var portaPortone = COLOR(grigioPortone)(STRUCT([portaPortoneAlfa, S([0])([-1])(portaPortoneAlfa)]));
+	var cornicePortoneAlfa = STRUCT([	SIMPLEX_GRID([[1],[0.4],[-6.5,0.2]]),		//corniceOrizzontale
 										SIMPLEX_GRID([[-0.8,0.2],[0.4],[-3.2,3.3]])	//corniceVerticale
 										]);
-	var cornicePortone = COLOR(marroneCornicePortone)(STRUCT([cornicePortoneBeta, S([0])([-1])(cornicePortoneBeta)]));
+	var cornicePortone = COLOR(marroneCornicePortone)(STRUCT([cornicePortoneAlfa, S([0])([-1])(cornicePortoneAlfa)]));
 
-	var c1 = BEZIER(S0)([[0,0,6.7],[0,-0.3,6.7],[0,-0.3,7.15]]);		//curva sull'asse y centrale
-	var c2 = BEZIER(S0)([[1,0,6.7],[1.2,-0.3,6.7],[1.2,-0.3,7.15]]);	//curva diagonale a destra
-	var c3 = BEZIER(S0)([[1,0,6.7],[1.4,0,6.7],[1.4,0,7.15]]);			//curva sull'asse x a destra
+	var c1 = CUBIC_HERMITE(S0)([[0,-0.2,6.7],[1.2,0,6.7],[4.1,0,0],[0,1,0]]);	//curva sotto
+	var c2 = CUBIC_HERMITE(S0)([[0,-0.3,7.15],[1.4,0,7.15],[4.3,0,0],[0,1,0]]);	//curva sopra
 	
-	var c1c2 = CUBIC_HERMITE(S1)([c1,c2,[0,0,0], [0,0,0]]);
-	var c2c3 = CUBIC_HERMITE(S1)([c2,c3,[0.5,0,0], [0,0,0]]);	
-
-	var d1 = BEZIER(S0)([[0,-0.3,7.15],[1.2,-0.3,7.15]]);							//curva tra c1 e c2
-	var d2 = CUBIC_HERMITE(S0)([[1.2,-0.3,7.15],[1.4,0,7.15],[0.5,0,0],[0,0,0]]);	//curva tra c2 e c3
-	var ps = BEZIER(S0)([[0,0,7.15]]);		//punto speciale (al centro) per raccordare le curve
-	var d1ps = CUBIC_HERMITE(S1)([d1,ps,[0,0,0],[0,0,0]]);
-	var d2ps = CUBIC_HERMITE(S1)([d2,ps,[0,0,0],[0,0,0]]);	
-
-	var tettoPortoneBeta = STRUCT([	MAP(c1c2)(domain2),
-									MAP(c2c3)(domain2),
-									MAP(d1ps)(domain2),
-									MAP(d2ps)(domain2)
+	var c1c2 = BEZIER(S1)([c1,c2]);
+	
+	var d1 = BEZIER(S0)([[0,0,6.7],[1.2,0,6.7]]);
+	var d2 = BEZIER(S0)([[0,0,7.15],[1.4,0,7.15]]);
+	var c1d1 = BEZIER(S1)([c1,d1]);
+	var c2d2 = BEZIER(S1)([c2,d2]);	
+	
+	var tettoPortoneAlfa = STRUCT([	MAP(c1c2)(domain2),									
+									MAP(c1d1)(domain2),
+									MAP(c2d2)(domain2)
 									]);
+
+	var c3 = BEZIER(S0)([[1,0,5.7],[1,-0.25,5.75],[1,0.3,6.1],[1,-0.5,6.2],[1,-0.6,6.5],[1,-0.2,6.7]]);
+	var c4 = BEZIER(S0)([[1.2,0,5.7],[1.2,-0.25,5.75],[1.2,0.3,6.1],[1.2,-0.5,6.2],[1.2,-0.6,6.5],[1.2,-0.2,6.7]]);
+	var c3c4 = BEZIER(S1)([c3,c4]);
+
+	var d3 = BEZIER(S0)([[1,0,5.7],[1,0,6.7]]);
+	var d4 = BEZIER(S0)([[1.2,0,5.7],[1.2,0,6.7]]);
+	var c3d3 = BEZIER(S1)([c3,d3]);
+	var c4d4 = BEZIER(S1)([c4,d4]);
+
+	var tettoPortoneBeta = STRUCT([	tettoPortoneAlfa,									
+									MAP(c3c4)(domain2),
+									MAP(c3d3)(domain2),
+									MAP(c4d4)(domain2)
+									]);
+
 	var tettoPortone = COLOR(marroneCornicePortone)(STRUCT([tettoPortoneBeta, S([0])([-1])(tettoPortoneBeta)]));
 
 	var portone = STRUCT([portaPortone,cornicePortone,tettoPortone]);
@@ -310,8 +321,10 @@ var getMuroFrontale_Centrale = function(){
 ***********************************************************************************/
 var getCornicioneFrontale_Inferiore = function(){
 	var parteDrittaAlfa = STRUCT([	SIMPLEX_GRID([[-4.65,3.65],[0.55],[-3,0.25]]),
-									SIMPLEX_GRID([[-1,7.25],[-0.05,0.5],[-3.25,0.25]]),
-									SIMPLEX_GRID([[-1,7.2],[-0.1,0.45],[-3.5,0.25]])
+									SIMPLEX_GRID([[-1,2.85,-0.6,3.8],[-0.05,0.5],[-3.25,0.25]]),
+									SIMPLEX_GRID([[-1,2.85,-0.6,3.75],[-0.1,0.45],[-3.5,0.25]]),
+									SIMPLEX_GRID([[-3.85,0.6],[-0.15,0.4],[-3.25,0.6]]),
+									SIMPLEX_GRID([[-1,3.65],[-0.15,0.4],[-3.2,0.05]]),
 									]);
 	var parteDritta = COLOR(marronePietra)(STRUCT([parteDrittaAlfa, S([0])([-1])(parteDrittaAlfa)]));
 
@@ -321,14 +334,23 @@ var getCornicioneFrontale_Inferiore = function(){
 	var partiDritte = STRUCT([parteDritta,pezzetto]);	
 
 	//parte spigolosa
-	var c1 = BEZIER(S0)([[8.2,0.1,3.75],[8.15,0.15,3.75],[8.15,0.15,3.85]]);	//curva diagonale a destra
-	var c2 = BEZIER(S0)([[1,0.1,3.75],[1,0.15,3.75],[1,0.15,3.85]]);			//curva diagonale vicino colonne
-	var c3 = BEZIER(S0)([[8.2,0.55,3.75],[8.15,0.55,3.75],[8.15,0.55,3.85]]);	//curva laterale a destra
-	var c1c2 = BEZIER(S1)([c1,c2]);
-	var c1c3 = BEZIER(S1)([c1,c3]);
+	var c1 = BEZIER(S0)([[1,0.1,3.75],[1,0.15,3.75],[1,0.15,3.85]]);			//curva diagonale vicino porta
+	var c2 = BEZIER(S0)([[3.85,0.1,3.75],[3.85,0.15,3.75],[3.85,0.15,3.85]]);	//curva a sinistra della colonna
+	var c3 = BEZIER(S0)([[4.45,0.1,3.75],[4.45,0.15,3.75],[4.45,0.15,3.85]]);	//curva a destra della colonna
+	var c4 = BEZIER(S0)([[8.2,0.1,3.75],[8.15,0.15,3.75],[8.15,0.15,3.85]]);	//curva diagonale a destra
+	var c5 = BEZIER(S0)([[8.2,0.55,3.75],[8.15,0.55,3.75],[8.15,0.55,3.85]]);	//curva laterale a destra
+
+	var ps1 = BEZIER(S0)([[3.85,0.15,3.75]]);
+	var ps2 = BEZIER(S0)([[4.45,0.15,3.75]]);
 	
-	var parteSpigolosaBeta = STRUCT([MAP(c1c2)(domain2), MAP(c1c3)(domain2)]);
-	var parteSpigolosa = COLOR(marronePietra)(STRUCT([parteSpigolosaBeta, S([0])([-1])(parteSpigolosaBeta)]));
+	var c1c2 = BEZIER(S1)([c1,c2]);
+	var c3c4 = BEZIER(S1)([c3,c4]);
+	var c4c5 = BEZIER(S1)([c4,c5]);
+	var c2ps1 = BEZIER(S1)([c2,ps1]);
+	var c3ps2 = BEZIER(S1)([c3,ps2]);
+	
+	var parteSpigolosaAlfa = STRUCT([MAP(c1c2)(domain2), MAP(c3c4)(domain2), MAP(c4c5)(domain2), MAP(c2ps1)(domain2), MAP(c3ps2)(domain2)]);
+	var parteSpigolosa = COLOR(marronePietra)(STRUCT([parteSpigolosaAlfa, S([0])([-1])(parteSpigolosaAlfa)]));
 
 	var cornicioneInferiore = STRUCT([partiDritte,parteSpigolosa]);
 	return cornicioneInferiore;
@@ -343,6 +365,7 @@ var getCornicioneFrontale_Inferiore = function(){
 var getColonnato = function(){
 	//base della colonna
 	var baseCiambella = SIMPLEX_GRID([[-3.85,0.6],[0.6],[0.1]]);
+	var baseMezzaCiambella = T([2])([-0.3])(SIMPLEX_GRID([[-3.85,0.6],[0.3],[0.4]]));
 
 	var c1 = CUBIC_HERMITE(S0)([[0.3,0,0],[-0.3,0,0],[0,1.2,0],[0,-1.2,0]]);		//semi-curva diametro 0.6
 	var c2 = CUBIC_HERMITE(S0)([[0.2,0,0.05],[-0.2,0,0.05],[0,0.8,0],[0,-0.8,0]]);	//semi-curva diametro 0.4
@@ -352,18 +375,27 @@ var getColonnato = function(){
 	var ciambellaEsternaBeta = STRUCT([ciambellaEsternaAlfa, S([1])([-1])(ciambellaEsternaAlfa)]);
 	var ciambellaEsterna = T([0,1,2])([4.15,0.3,0.25])(ciambellaEsternaBeta);
 
+	var mezzaCiambellaEsternaAlfa = S([1])([-1])(ciambellaEsternaAlfa);
+	var mezzaCiambellaEsterna = T([0,1,2])([4.15,0.3,0.25])(mezzaCiambellaEsternaAlfa);
+
 	var c3 = CUBIC_HERMITE(S0)([[0.2,0,0.1],[-0.2,0,0.1],[0,0.8,0],[0,-0.8,0]]);	//semi-curva diametro 0.4
 	var c1c3 = CUBIC_HERMITE(S1)([c1,c3,[0,-0.2,0], [0,0,0.1]]);
 	var surfacec1c3 = MAP(c1c3)(domain2);
-	var ciambellaInternaBeta = STRUCT([surfacec1c3, S([1])([-1])(surfacec1c3)]);
-	var ciambellaInterna = T([0,1,2])([4.15,0.3,0.1])(ciambellaInternaBeta);
+	var ciambellaInternaAlfa = STRUCT([surfacec1c3, S([1])([-1])(surfacec1c3)]);
+	var ciambellaInterna = T([0,1,2])([4.15,0.3,0.1])(ciambellaInternaAlfa);
+
+	var mezzaCiambellaInternaAlfa = S([1])([-1])(surfacec1c3);
+	var mezzaCiambellaInterna = T([0,1,2])([4.15,0.3,0.1])(mezzaCiambellaInternaAlfa);
 
 	var baseColonnaAlfa = STRUCT([baseCiambella,ciambellaEsterna,ciambellaInterna]);
 	var baseColonnaBeta = T([2])([3.5])(baseColonnaAlfa);
+	var baseMezzaColonnaAlfa = STRUCT([baseMezzaCiambella,mezzaCiambellaEsterna,mezzaCiambellaInterna]);
+	var baseMezzaColonnaBeta = T([2])([3.5])(baseMezzaColonnaAlfa);
 	var baseColonnaGamma = STRUCT([	baseColonnaBeta,
 									T([0])([-1.6])(baseColonnaBeta),
 									T([0])([-3.2])(baseColonnaBeta),
 									T([1])([1.6])(baseColonnaBeta),
+									T([1])([3.5])(baseMezzaColonnaBeta)//da rivedere il 3.5
 									]);
 	var basiColonne = COLOR(avorioMuro)(STRUCT([baseColonnaGamma, S([0])([-1])(baseColonnaGamma)]));
 
@@ -372,16 +404,25 @@ var getColonnato = function(){
 	var profiloColonna = BEZIER(S0)([[0.25,0,3.8],[0.2,0,7.65]]);
 	var mapping = ROTATIONAL_SURFACE(profiloColonna);
 	var colonnaAlfa = MAP(mapping)(domain);
-	colonnaBeta = T([0,1])([4.15,0.3])(colonnaAlfa);
+	var colonnaBeta = T([0,1])([4.15,0.3])(colonnaAlfa);
+
+	var domainMezza = DOMAIN([[0,1],[0,PI]])([15,15]);
+	var profiloMezzaColonna = BEZIER(S0)([[0.25,0,3.8],[0.2,0,7.65]]);
+	var mappingMezza = ROTATIONAL_SURFACE(profiloMezzaColonna);
+	var mezzaColonnaAlfa = MAP(mappingMezza)(domainMezza);
+	var mezzaColonnaBeta = R([0,1])([-PI])(mezzaColonnaAlfa);
+
 	var colonnaGamma = STRUCT([	colonnaBeta,
 								T([0])([-1.6])(colonnaBeta),
 								T([0])([-3.2])(colonnaBeta),
 								T([1])([1.6])(colonnaBeta),
+								T([0,1])([4.15,3.8])(mezzaColonnaBeta)	//da rivedere il 3.8
 								]);
 	var colonne = COLOR(rosaColonne)(STRUCT([colonnaGamma, S([0])([-1])(colonnaGamma)]));
 
 	//capitello della colonna
 	var baseCapitello = SIMPLEX_GRID([[0.6],[0.6],[-0.1,0.15]]);
+	var baseMezzoCapitello = SIMPLEX_GRID([[0.3],[0.6],[-0.1,0.15]]);
 
 	var g1 = CUBIC_HERMITE(S0)([[0.1,0,0],[-0.1,0,0],[0,0,0.4],[0,0,-0.4]]);		//semi-curva diametro 0.2
 	var g2 = CUBIC_HERMITE(S0)([[0.1,0.6,0],[-0.1,0.6,0],[0,0,0.4],[0,0,-0.4]]);	//semi-curva parallela diametro 0.2
@@ -417,12 +458,17 @@ var getColonnato = function(){
 	var collegamentiCilindroBase = STRUCT([collegamentoCilindroBase1, T([0])([0.6])(collegamentoCilindroBase2)]);
 
 	var capitelloAlfa = STRUCT([baseCapitello, cilindri, collegamentiCilindroBase]);
+
+	var mezzoCapitelloAlfa = STRUCT([baseMezzoCapitello,cilindro,collegamentoCilindroBase1]);
+	var mezzoCapitelloBeta = R([0,1])([PI/2])(mezzoCapitelloAlfa);
+
 	var capitelloAlfaRuotato = R([0,1])([-PI/2])(capitelloAlfa);
 	var capitelloBeta = T([0,2])([3.85,7.55])(capitelloAlfa);
 	var capitelloGamma = STRUCT([	capitelloBeta,
 									T([0])([-1.6])(capitelloBeta),
 									T([0])([-3.2])(capitelloBeta),
-									T([0,1,2])([3.85,2.2,7.55])(capitelloAlfaRuotato)
+									T([0,1,2])([3.85,2.2,7.55])(capitelloAlfaRuotato),
+									T([0,1,2])([4.45,3.5,7.55])(mezzoCapitelloBeta)
 									]);
 	var capitelli = COLOR(avorioMuro)(STRUCT([capitelloGamma, S([0])([-1])(capitelloGamma)]));
 
@@ -471,13 +517,13 @@ var getTettoSopraColonnato = function(){
 	var d4 = BEZIER(S0)([[0,0.3,8.15],[4.45,0.3,8.15]]);
 	var d3d4 = BEZIER(S1)([d3,d4]);
 	
-	var parteSpigolosaInferioreBeta = STRUCT([	MAP(c1c2)(domain2),
+	var parteSpigolosaInferioreAlfa = STRUCT([	MAP(c1c2)(domain2),
 												MAP(d1d2)(domain2),
 												MAP(c2c3)(domain2),
 												MAP(d3d4)(domain2)
 											]);
-	var parteSpigolosaInferiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaInferioreBeta,
-																	S([0])([-1])(parteSpigolosaInferioreBeta)
+	var parteSpigolosaInferiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaInferioreAlfa,
+																	S([0])([-1])(parteSpigolosaInferioreAlfa)
 																	]));
 
 	var baseTettoAlfa = SIMPLEX_GRID([[4.65],[4],[-8.6,0.1]]);
@@ -559,7 +605,7 @@ var getCornicioneFrontale_Centrale = function(){
 								COLOR(avorioMuro)(parteDritta22),
 								COLOR(marroneCornicione)(parteDritta33),
 								COLOR(avorioMuro)(parteDritta44)
-							]));
+								]));
 
 	
 	//parte spigolosa inferiore
@@ -578,13 +624,13 @@ var getCornicioneFrontale_Centrale = function(){
 	var d4 = BEZIER(S0)([[8.15,0.1,8.15],[8.15,0.55,8.15]]);
 	var d3d4 = BEZIER(S1)([d3,d4]);
 	
-	var parteSpigolosaInferioreBeta = STRUCT([	MAP(c1c2)(domain2),
+	var parteSpigolosaInferioreAlfa = STRUCT([	MAP(c1c2)(domain2),
 												MAP(d1d2)(domain2),
 												MAP(c1c3)(domain2),
 												MAP(d3d4)(domain2)
 											]);
-	var parteSpigolosaInferiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaInferioreBeta,
-																	S([0])([-1])(parteSpigolosaInferioreBeta)
+	var parteSpigolosaInferiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaInferioreAlfa,
+																	S([0])([-1])(parteSpigolosaInferioreAlfa)
 																]));
 
 	
@@ -604,13 +650,13 @@ var getCornicioneFrontale_Centrale = function(){
 	var g4 = BEZIER(S0)([[8.15,0.15,8.7],[8.15,0.55,8.7]]);
 	var g3g4 = BEZIER(S1)([g3,g4]);
 
-	var parteSpigolosaSuperioreBeta = STRUCT([	MAP(f1f2)(domain2),
+	var parteSpigolosaSuperioreAlfa = STRUCT([	MAP(f1f2)(domain2),
 												MAP(g1g2)(domain2),
 												MAP(f1f3)(domain2),
 												MAP(g3g4)(domain2)
 											]);
-	var parteSpigolosaSuperiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaSuperioreBeta,
-																	S([0])([-1])(parteSpigolosaSuperioreBeta)
+	var parteSpigolosaSuperiore = COLOR(marroneCornicione)(STRUCT([	parteSpigolosaSuperioreAlfa,
+																	S([0])([-1])(parteSpigolosaSuperioreAlfa)
 																]));	
 	
 	var cornicione = STRUCT([parteDritta,parteSpigolosaInferiore,parteSpigolosaSuperiore]);
@@ -623,11 +669,11 @@ var getCornicioneFrontale_Centrale = function(){
 *	Ritorna il muro frontale superiore, con lo spigolo in basso a destra di coordinate x=8.15, y=0, z=8.7
 **********************************************************************************************************/
 var getMuroFrontale_Superiore = function(){
-	var muroBeta = STRUCT([	SIMPLEX_GRID([[3.3,-0.9,2.25,-0.9,0.8],[0.4],[-8.7,1.75]]),
+	var muroAlfa = STRUCT([	SIMPLEX_GRID([[3.3,-0.9,2.25,-0.9,0.8],[0.4],[-8.7,1.75]]),
 							SIMPLEX_GRID([[-3.3,0.9],[0.4],[-8.7,0.81,-0.6,0.34]]),
 							SIMPLEX_GRID([[-6.45,0.9],[0.4],[-8.7,0.01,-1.4,0.34]])
 							]);
-	var muro = COLOR(avorioMuro)(STRUCT([muroBeta, S([0])([-1])(muroBeta)]));
+	var muro = COLOR(avorioMuro)(STRUCT([muroAlfa, S([0])([-1])(muroAlfa)]));
 
 	//finestre piccole
 	var finestraPiccola = T([1,2])([0.1,9.51])(getFinestraFrontale_09x06());
@@ -2266,7 +2312,7 @@ DRAW(villaFoscari);
 	DRAW(getFacciateLaterali());
 	DRAW(getFacciataPosteriore());
 	DRAW(getCopertura());
-	DRAW(getCamini());
 	DRAW(getInterno());
 	DRAW(getGiardini());
+	DRAW(getCamini());
 */
