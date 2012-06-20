@@ -2299,7 +2299,7 @@ var getVillaFoscari = function(){
 	var tetto = getTetto();
 	var interno = getInterno();
 	var giardini = getGiardini();
-	var villaFoscari = STRUCT([facciataFrontale,facciateLaterali,facciataPosteriore,interno,giardini]);
+	var villaFoscari = STRUCT([facciataFrontale,facciateLaterali,facciataPosteriore,tetto,interno,giardini]);
 	return villaFoscari;
 };
 
