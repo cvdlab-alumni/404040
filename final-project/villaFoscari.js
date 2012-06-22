@@ -2129,9 +2129,9 @@ var getCamini = function(){
 	var m4 = BEZIER(S0)([[0.44,0.05,14.5],[0.44,0.05,14.7],[0.64,0.05,14.7],[0.64,0.05,14.9],[0.54,0.05,14.9]]);
 	var m3m4 = BEZIER(S1)([m3,m4]);
 
-	var m1m2m3m4 = BEZIER(S2)([m1m2,m3m4]);
-	var dominio3 = DOMAIN([[0,1],[0,1],[0,1]])([10,5,5]);
-	var sol_m1m2m3m4 = MAP(m1m2m3m4)(dominio3);
+	var m1m3 = BEZIER(S1)([m1,m3]);
+	var m2m4 = BEZIER(S1)([m2,m4]);
+	var sol_m1m2m3m4 = STRUCT([MAP(m1m2)(domain2), MAP(m3m4)(domain2), MAP(m1m3)(domain2), MAP(m2m4)(domain2)]);
 
 	var mattonciniAlfa = STRUCT([	sol_m1m2m3m4,
 									R([0,1])([PI/6])(sol_m1m2m3m4),								
@@ -2245,14 +2245,14 @@ var getTetto = function(){
 /****************************INTERNO E GIARDINI****************************/
 
 var getInterno = function(){
-	var pavimenti = SIMPLEX_GRID([[7.75],[-0.5,10.2],[0.1,-5.95,0.4,-4.3,0.1]]);	
-	var muriOrizzontali = STRUCT([	SIMPLEX_GRID([[-2.1,4.35,-0.9,0.4],[-4,0.4,-3.5,0.4],[-0.1,5.95,-0.4,4.3]]),
-									SIMPLEX_GRID([[-6.45,0.9],[-4,0.4,-3.5,0.4],[-2.1,3.95,-2.4,2.3]])						
+	var pavimenti = SIMPLEX_GRID([[7.75],[-0.5,10.2],[0.1,-2.9,0.85,-3.95,0.9,-1.95,0.1]]);	
+	var muriOrizzontali = STRUCT([	SIMPLEX_GRID([[-2.1,4.35,-0.9,0.4],[-4,0.4,-3.5,0.4],[-0.1,2.9,-0.85,3.95,-0.9,1.95]]),
+									SIMPLEX_GRID([[-6.45,0.9],[-4,0.4,-3.5,0.4],[-1.6,1.4,-2.35,2.45,-2.6,0.25]])						
 									]);
-	var muriVerticaliali = STRUCT([	SIMPLEX_GRID([[-2.1,0.4],[-0.5,1.3,-0.9,1.3,-4.3,0.75,-0.9,0.75],[-0.1,5.95,-0.4,4.3]]),
-									SIMPLEX_GRID([[-2.1,0.4],[-1.8,0.9,-6.35,0.9],[-2.1,3.95,-2.4,2.3]]),
-									SIMPLEX_GRID([[-3.85,0.4],[-4.4,1.3,-0.9,1.3,-0.4,0.75,-0.9,0.75],[-0.1,5.95,-0.4,4.3]]),
-									SIMPLEX_GRID([[-3.85,0.4],[-5.7,0.9,-2.45,0.9],[-2.1,3.95,-2.4,2.3]]),
+	var muriVerticaliali = STRUCT([	SIMPLEX_GRID([[-2.1,0.4],[-0.5,1.3,-0.9,1.3,-4.3,0.75,-0.9,0.75],[-0.1,2.9,-0.85,3.95,-0.9,1.95]]),
+									SIMPLEX_GRID([[-2.1,0.4],[-1.8,0.9,-6.35,0.9],[-1.6,1.4,-2.35,2.45,-2.6,0.25]]),
+									SIMPLEX_GRID([[-3.85,0.4],[-4.4,1.3,-0.9,1.3,-0.4,0.75,-0.9,0.75],[-0.1,2.9,-0.85,3.95,-0.9,1.95]]),
+									SIMPLEX_GRID([[-3.85,0.4],[-5.7,0.9,-2.45,0.9],[-1.6,1.4,-2.35,2.45,-2.6,0.25]]),
 									]);
 	var interniAlfa = STRUCT([pavimenti,muriOrizzontali,muriVerticaliali]);
 	var interno = COLOR(avorioMuro)(STRUCT([interniAlfa, S([0])([-1])(interniAlfa)]));
@@ -2307,12 +2307,11 @@ var villaFoscari = getVillaFoscari();
 DRAW(villaFoscari);
 
 /*
-	per evitare che ci metta tanto a caricare, è preferibile dare i seguenti comandi uno alla volta:
+	Per evitare che ci metta tanto a caricare, è preferibile dare i seguenti comandi uno alla volta:
 	DRAW(getFacciataFrontale());
 	DRAW(getFacciateLaterali());
 	DRAW(getFacciataPosteriore());
-	DRAW(getCopertura());
+	DRAW(getTetto());
 	DRAW(getInterno());
 	DRAW(getGiardini());
-	DRAW(getCamini());
 */
